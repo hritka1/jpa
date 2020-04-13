@@ -58,9 +58,9 @@ public class Book {
 	public void setPrice(Double price) {
 		this.price = price;
 	}
-	public Book(Long id, String title, String publisher, Author author, Double price) {
+	public Book(String title, String publisher, Author author, Double price) {
 		super();
-		this.id = id;
+	
 		this.title = title;
 		this.publisher = publisher;
 		this.author = author;

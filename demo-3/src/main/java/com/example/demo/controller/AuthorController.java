@@ -1,4 +1,4 @@
-package com.example.controller;
+package com.example.demo.controller;
 
 import java.util.List;
 
@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +21,21 @@ public class AuthorController {
 	
 	@Autowired
 	AuthorRepo authorRepo;
-//test change
+	
+	
+	@GetMapping("/findByLastName/{lastName}")
+	public List<Author> getByLastName(@PathVariable(name="lastName") String lastName)
+	{
+		return (List<Author>) authorRepo.findByLastNameIgnoreCase(lastName);
+	}
+	
+	@GetMapping("/findByLastNameAsc/{lastName}")
+	public List<Author> getByLastNameAsc(@PathVariable(name="lastName") String lastName)
+	{
+		return (List<Author>) authorRepo.findByLastNameOrderByFirstNameAsc(lastName);
+	}
+	
+	//test change
 	
 	@RequestMapping(value = "/authors", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_JSON_VALUE, })
